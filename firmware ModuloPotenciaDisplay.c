@@ -49,7 +49,8 @@ int1
    flagLeituraAnalogica = false,
 
    flagEnviaPacoteUart = false,
-   flagPacoteUart = false;
+   flagPacoteUart = false,
+   flagPacoteValidoRecebido = false;
 
 unsigned int
    percentual = 0,

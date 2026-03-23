@@ -50,7 +50,11 @@ int1
 
    flagEnviaPacoteUart = false,
    flagPacoteUart = false,
-   flagPacoteValidoRecebido = false;
+   flagPacoteValidoRecebido = false,
+
+   flagAcionaPontoDecimal = false,
+
+   flagAtualizaDisplay = true;
 
 unsigned int
    percentual = 0,
@@ -71,6 +75,7 @@ ARQUIVOS ANEXOS
 #include <UtilityAnalog.c>
 #include <UtilityCOM.c>
 #include <SubrotinasProtocoloModuloPotencia.c>
+#include <SubrotinasDisplay.c>
 #include <InterrupcaoTimer1.c>
 /*==============================================================================
 MAIN                                           
@@ -105,6 +110,11 @@ void main() {
       if(flagEnviaPacoteUart) {
          flagEnviaPacoteUart = false;
          enviaPacoteModuloPotencia();
+      }
+
+      if(flagAtualizaDisplay) {
+         flagAtualizaDisplay = false;
+         atualizacaoDisplay();
       }
    }                                                   
 }                          

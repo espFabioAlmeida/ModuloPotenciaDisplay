@@ -8,7 +8,7 @@
 TAREFAS 1MS
 ==============================================================================*/
 void tarefas1ms() {
-
+   flagAtualizaDisplay = true;
 }
 /*==============================================================================
 TAREFAS 10MS
@@ -21,6 +21,16 @@ TAREFAS 100MS
 ==============================================================================*/
 void tarefas100ms() {
    flagLeituraAnalogica = true;
+
+   if(flagPacoteValidoRecebido && !flagAcionaPontoDecimal) {
+      flagAcionaPontoDecimal = true;
+   }
+   else {
+      if(flagAcionaPontoDecimal) {
+         flagAcionaPontoDecimal = false;
+         flagPacoteValidoRecebido = false;
+      }
+   }
 }
 /*==============================================================================
 TAREFAS 1S

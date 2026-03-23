@@ -49,8 +49,8 @@ int1
 unsigned int
    percentual = 0;
 
-unsigned int16
-   valorAnalog = 0;
+unsigned int32
+   valorModuloPotencia = 0;
 /*==============================================================================
 VARIAVEIS ARRAY
 ==============================================================================*/

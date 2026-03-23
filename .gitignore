@@ -1,0 +1,15 @@
+# Binaries
+*.hex
+*.err
+*.bak
+*.esym
+*.cof
+*.lst
+*.STA
+*.sym
+*.tre
+*.ini
+
+
+
+

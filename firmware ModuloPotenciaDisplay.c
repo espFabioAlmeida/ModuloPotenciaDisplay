@@ -18,13 +18,15 @@ CONFIGURACOES
 ==============================================================================*/
 #fuses INTRC_IO, NOWDT, PUT, PROTECT, BROWNOUT, NOLVP, NOCPD 
 #use delay(clock = 4000000)  
-#priority TIMER1          
+#use rs232(baud=9600, parity=N, xmit=PIN_C6, rcv=PIN_C7, enable=PIN_B5, bits=8, ERRORS)
+#priority RDA, TIMER1          
 /*==============================================================================
 CONSTANTES                         
 ==============================================================================*/
 #define on           output_high         
 #define off          output_low  
 
+#define TAMANHO_UART_BUFFER   32
 /*==============================================================================
 DEFINICOES DOS PINOS                                      
 ==============================================================================*/
@@ -44,13 +46,21 @@ DEFINICOES DOS PINOS
 VARIAVEIS
 ==============================================================================*/ 
 int1 
-   flagLeituraAnalogica = false;
+   flagLeituraAnalogica = false,
+
+   flagEnviaPacoteUart = false,
+   flagPacoteUart = false;
 
 unsigned int
-   percentual = 0;
+   percentual = 0,
+
+   contUartBuffer = 0;
 
 unsigned int32
    valorModuloPotencia = 0;
+
+char
+   uartBuffer[TAMANHO_UART_BUFFER];
 /*==============================================================================
 VARIAVEIS ARRAY
 ==============================================================================*/
@@ -58,6 +68,8 @@ VARIAVEIS ARRAY
 ARQUIVOS ANEXOS
 ==============================================================================*/
 #include <UtilityAnalog.c>
+#include <UtilityCOM.c>
+#include <SubrotinasProtocoloModuloPotencia.c>
 #include <InterrupcaoTimer1.c>
 /*==============================================================================
 MAIN                                           
@@ -72,10 +84,10 @@ void main() {
    setup_timer_2(T2_DISABLED, 0, 1); 
    
    delay_ms(500);  
-   
-                                                                                                   
+                                                                                                    
    enable_interrupts(GLOBAL); 
    enable_interrupts(INT_TIMER1);
+   enable_interrupts(INT_RDA);
 
    while(true) {
       
@@ -84,6 +96,15 @@ void main() {
          leituraPotenciometro();
       }
 
+      if(flagPacoteUart) {
+         flagPacoteUart = false;
+         recebePacoteModuloPotencia();
+      }
+
+      if(flagEnviaPacoteUart) {
+         flagEnviaPacoteUart = false;
+         enviaPacoteModuloPotencia();
+      }
    }                                                   
 }                          
 /*==============================================================================

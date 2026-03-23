@@ -8,10 +8,9 @@
 LIMPA STRING
 ==============================================================================*/
 void limpaBufferUart() {
-   for(unsigned int i = 0; i < BUFFER_MODBUS_SIZE; i ++) {
-      bufferModbus[i] = 0x00; 
+   for(unsigned int i = 0; i < TAMANHO_UART_BUFFER; i ++) {
+      uartBuffer[i] = 0x00; 
    }
-
    contUartBuffer = 0;
 }
 /*==============================================================================
@@ -24,10 +23,13 @@ void rda() {
       uartBuffer[contUartBuffer] = dado;
       
       contUartBuffer ++;
-      if(contUartBuffer >= BUFFER_MODBUS_SIZE) {
+      if(contUartBuffer >= TAMANHO_UART_BUFFER) {
          limpaBufferUart();
       }
       
+      if(dado == 0x0A) {
+         flagPacoteUart = true;
+      }
    }
 }
 /*==============================================================================

@@ -52,12 +52,22 @@ void atualizacaoDisplay() {
 
     switch(offset) {
         case 0:
-            escreve7segmentos(cent);
+            if(cent < 1) {
+                escreve7segmentos(' ');
+            }
+            else {
+                escreve7segmentos(cent);
+            }         
             on(DISPLAY_CENT);
             break;
 
         case 1:
-            escreve7segmentos(deze);
+            if(cent < 1 && deze < 1) {
+                escreve7segmentos(' ');
+            }
+            else {
+                escreve7segmentos(deze);
+            }         
             on(DISPLAY_DEZE);
             break;
 

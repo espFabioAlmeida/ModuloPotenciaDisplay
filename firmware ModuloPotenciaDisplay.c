@@ -52,9 +52,7 @@ int1
    flagPacoteUart = false,
    flagPacoteValidoRecebido = false,
 
-   flagAcionaPontoDecimal = false,
-
-   flagAtualizaDisplay = true;
+   flagAcionaPontoDecimal = false;
 
 unsigned int
    percentual = 0,
@@ -93,7 +91,7 @@ void main() {
                                                                                                     
    enable_interrupts(GLOBAL); 
    enable_interrupts(INT_TIMER1);
-   //enable_interrupts(INT_RDA);
+   enable_interrupts(INT_RDA);
 
    while(true) {
       
@@ -110,13 +108,7 @@ void main() {
       if(flagEnviaPacoteUart) {
          flagEnviaPacoteUart = false;
          enviaPacoteModuloPotencia();
-      }
-
-      if(flagAtualizaDisplay) {
-         flagAtualizaDisplay = false;
-         //atualizacaoDisplay();
-      }
-         
+      } 
    }                                                   
 }                          
 /*==============================================================================

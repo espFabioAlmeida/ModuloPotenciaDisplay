@@ -18,7 +18,7 @@ INTERRUPCAO RDA
 ==============================================================================*/
 #INT_RDA
 void rda() { 
-  /* if(kbhit()) {
+   if(kbhit()) {
       char dado = getch();
       uartBuffer[contUartBuffer] = dado;
       
@@ -30,7 +30,7 @@ void rda() {
       if(dado == 0x0A) {
          flagPacoteUart = true;
       }
-   }*/
+   }
 }
 /*==============================================================================
 FIM DO ARQUIVO

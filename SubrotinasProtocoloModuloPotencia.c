@@ -13,8 +13,9 @@ RECEBE PACOTE MODULO POTENCIA
 ==============================================================================*/
 void recebePacoteModuloPotencia() {
    
-    if(uartBuffer[0] == '$' && uartBuffer[1] == '0' 
-        && uartBuffer[2] == '9' && uartBuffer[3] == '0') {
+    if(uartBuffer[0] == '$' && uartBuffer[1] == ',' 
+        && uartBuffer[2] == '0' && uartBuffer[3] == '9'
+        && uartBuffer[4] == '0') {
             flagPacoteValidoRecebido = true;
         }
 

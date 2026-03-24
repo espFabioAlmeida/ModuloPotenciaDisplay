@@ -17,7 +17,7 @@
 CONFIGURACOES                          
 ==============================================================================*/
 #fuses INTRC_IO, NOWDT, PUT, PROTECT, BROWNOUT, NOLVP, NOCPD 
-#use delay(clock = 4000000)  
+#use delay(clock = 16000000)  
 #use rs232(baud=9600, parity=N, xmit=PIN_C6, rcv=PIN_C7, enable=PIN_B5, bits=8, ERRORS)
 #priority RDA, TIMER1          
 /*==============================================================================
@@ -32,7 +32,7 @@ DEFINICOES DOS PINOS
 ==============================================================================*/
 #define DISPLAY_A   PIN_C1
 #define DISPLAY_B   PIN_C3
-#define DISPLAY_C   PIN_C2
+#define DISPLAY_C   PIN_A2
 #define DISPLAY_D   PIN_A5
 #define DISPLAY_E   PIN_C0
 #define DISPLAY_F   PIN_C2
@@ -81,19 +81,19 @@ ARQUIVOS ANEXOS
 MAIN                                           
 ==============================================================================*/
 void main() {                              
-   setup_oscillator(OSC_4MHZ);  
+   setup_oscillator(OSC_16MHZ);  
    setup_adc(adc_clock_internal);
    setup_adc_ports(sAN0);
    set_adc_channel(0);
                             
-   setup_timer_1(T1_INTERNAL | T1_DIV_BY_1);       
+   setup_timer_1(T1_INTERNAL | T1_DIV_BY_4);       
    setup_timer_2(T2_DISABLED, 0, 1); 
    
    delay_ms(500);  
                                                                                                     
    enable_interrupts(GLOBAL); 
    enable_interrupts(INT_TIMER1);
-   enable_interrupts(INT_RDA);
+   //enable_interrupts(INT_RDA);
 
    while(true) {
       
@@ -114,8 +114,9 @@ void main() {
 
       if(flagAtualizaDisplay) {
          flagAtualizaDisplay = false;
-         atualizacaoDisplay();
+         //atualizacaoDisplay();
       }
+         
    }                                                   
 }                          
 /*==============================================================================

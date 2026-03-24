@@ -31,22 +31,43 @@ void enviaPacoteModuloPotencia() {
     enviaValor[3] = valorModuloPotencia / 10;
     enviaValor[4] = valorModuloPotencia % 10;
 
-    for(unsigned int i = 0; i < 5; i ++) {
-        if(enviaValor[i] > 9) {
-            enviaValor[i] %= 10;
-        }
+    if(enviaValor[0] > 9) {
+        enviaValor[0] %= 10;
+    }
+    if(enviaValor[1] > 9) {
+        enviaValor[1] %= 10;
+    }
+    if(enviaValor[2] > 9) {
+        enviaValor[2] %= 10;
+    }
+    if(enviaValor[3] > 9) {
+        enviaValor[3] %= 10;
     }
 
     if(valorModuloPotencia <= VALOR_MINIMO_LIGADO) {
-        printf("$,090,0,1,00000,");
+        printf("$,");
+        printf("090");
+        printf(",0,");
+        printf("1,");
+        printf("00");
+        printf("00");
+        printf("0");
+        printf(",\r");  
+        printf("\n"); 
         return;
     }
 
-    printf("$,090,1,1,");
-    for(i = 0; i < 5; i ++) {
-        printf("%u", enviaValor[i]);
-    }
-    printf(",\r\n");  
+    printf("$,");
+    printf("090");
+    printf(",1,");
+    printf("1,");
+    printf("%Lu", enviaValor[0]);
+    printf("%Lu", enviaValor[1]);
+    printf("%Lu", enviaValor[2]);
+    printf("%Lu", enviaValor[3]);
+    printf("%Lu", enviaValor[4]);
+    printf(",\r");  
+    printf("\n");  
 }
 /*==============================================================================
 FIM DO ARQUIVO

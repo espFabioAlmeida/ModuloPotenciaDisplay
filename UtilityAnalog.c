@@ -13,7 +13,7 @@ CONSTANTES DO ARQUIVO
 LEITURA POTENCIOMETRO
 ==============================================================================*/ 
 void leituraPotenciometro() {
-    unsigned int32 valorAnalog = read_adc();
+    unsigned int32 valorAnalog = MAX_ADC - read_adc();
     valorModuloPotencia = valorAnalog;
     valorModuloPotencia *= MAX_MODULO_POTENCIA;
     valorModuloPotencia /= MAX_ADC;
